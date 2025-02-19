@@ -3,69 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AegisVault | Web3 Security</title>
+    <meta name="description" content="AegisVault - Decentralized Web3 Security Solutions">
+    <title>AegisVault - Web3 Security</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
 </head>
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        alert("JavaScript Loaded!"); // This should pop up if JavaScript is running.
-    });
-</script>
 <body>
 
-    <header class="hero">
-        <h1>AegisVault: Web3 Security, Redefined.</h1>
-        <p>Eliminate vulnerabilities. Protect your smart contracts. Secure Web3.</p>
-        <button class="cta-btn primary" id="auditBtn">🔒 Get a Security Audit</button>
-        <button class="cta-btn secondary" id="howItWorksBtn">📖 How AegisVault Works</button>
+    <!-- Sticky Header -->
+    <header class="sticky-header">
+        <h1>AegisVault</h1>
+        <nav>
+            <a href="#why">Why AegisVault?</a>
+            <a href="#packages">Security Packages</a>
+            <a href="#contact">Join Community</a>
+        </nav>
     </header>
 
-    <section class="features">
-        <h2>🔷 Why AegisVault?</h2>
-        <div class="feature-grid">
-            <div class="feature-card">✅ <strong>Decentralized Identity</strong><p>No central points of failure. Fully decentralized security.</p></div>
-            <div class="feature-card">✅ <strong>AI-Driven Monitoring</strong><p>Detect & prevent attacks before they happen.</p></div>
-            <div class="feature-card">✅ <strong>Smart Contract Auditing</strong><p>Real-time security scanning for vulnerabilities.</p></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>AegisVault: Web3 Security, Redefined.</h2>
+        <p>Eliminate vulnerabilities. Protect your smart contracts. Secure Web3.</p>
+        <div class="buttons">
+            <button onclick="redirectToAudit()">🔒 Get a Security Audit</button>
+            <button onclick="scrollToSection('how-it-works')">📖 How AegisVault Works</button>
         </div>
     </section>
 
-    <section class="packages">
+    <!-- Why AegisVault -->
+    <section id="why">
+        <h2>🔹 Why AegisVault?</h2>
+        <div class="feature-container">
+            <div class="feature-box">✅ <strong>Decentralized Identity</strong> - No central points of failure.</div>
+            <div class="feature-box">✅ <strong>AI-Driven Monitoring</strong> - Detect and prevent attacks before they happen.</div>
+            <div class="feature-box">✅ <strong>Smart Contract Auditing</strong> - Real-time security scanning.</div>
+        </div>
+    </section>
+
+    <!-- Security Packages -->
+    <section id="packages">
         <h2>💰 Security Packages</h2>
-        <div class="package-grid">
-            <div class="package-card">
-                <h3>🔷 Basic Scan</h3>
-                <p>✅ AI-powered contract check</p>
-                <p>✅ Quick report</p>
-                <p><strong>FREE</strong></p>
-                <button class="cta-btn" id="basicScanBtn">Get Started</button>
+        <div class="packages-container">
+            <div class="package">
+                <h3>🔹 Basic Scan</h3>
+                <p>✅ AI-powered contract check <br> ✅ Quick report</p>
+                <p class="price">FREE</p>
+                <button onclick="redirectToBasicScan()">Get Started</button>
             </div>
-            <div class="package-card highlight">
+            <div class="package premium">
                 <h3>🔥 Advanced Audit</h3>
-                <p>✅ AI + Manual review</p>
-                <p>✅ Detailed vulnerability report</p>
-                <p><strong>$499</strong></p>
-                <button class="cta-btn" id="advancedAuditBtn">Secure Your Assets</button>
+                <p>✅ AI + Manual review <br> ✅ Detailed vulnerability report</p>
+                <p class="price">$499</p>
+                <button onclick="redirectToAdvancedAudit()">Secure Your Assets</button>
             </div>
-            <div class="package-card">
+            <div class="package">
                 <h3>🏆 Enterprise Protection</h3>
-                <p>✅ Full-time monitoring</p>
-                <p>✅ Smart contract security suite</p>
-                <p><strong>Custom Pricing</strong></p>
-                <button class="cta-btn" id="contactUsBtn">Contact Us</button>
+                <p>✅ Full-time monitoring <br> ✅ Smart contract security suite</p>
+                <p class="price">Custom Pricing</p>
+                <button onclick="redirectToContact()">Contact Us</button>
             </div>
         </div>
     </section>
 
-    <footer>
+    <!-- Newsletter & Community -->
+    <section id="contact">
         <h2>🌍 Join the AegisVault Community</h2>
         <p>Stay updated on Web3 security, join discussions, and connect with other builders.</p>
-        <div class="footer-links">
-            <a href="https://github.com/aegis-vault" target="_blank">GitHub</a> |
-            <a href="https://twitter.com/aegisvault" target="_blank">Twitter</a> |
-            <a href="https://t.me/aegisvault" target="_blank">Telegram</a>
-        </div>
-    </footer>
+        <form id="newsletter-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="scrollToTop()">⬆ Back to Top</button>
 
 </body>
 </html>
