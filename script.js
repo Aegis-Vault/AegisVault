@@ -1,26 +1,39 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Button actions
-    document.getElementById("auditBtn").addEventListener("click", function () {
-        alert("Redirecting to Security Audit request form...");
-        window.location.href = "https://aegisvault.com/security-audit";
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("JavaScript Loaded!");
+    
+    // Remove popups and replace with redirects
+    window.redirectToAudit = function() {
+        window.location.href = "https://your-security-audit-form.com";
+    };
+    
+    window.redirectToBasicScan = function() {
+        window.location.href = "https://your-basic-scan-form.com";
+    };
+    
+    window.redirectToAdvancedAudit = function() {
+        window.location.href = "https://your-advanced-audit-form.com";
+    };
+    
+    window.redirectToContact = function() {
+        window.location.href = "https://your-contact-page.com";
+    };
+    
+    window.scrollToSection = function(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
+    };
+    
+    window.scrollToTop = function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    // Back to Top Button Visibility
+    window.addEventListener("scroll", function() {
+        document.getElementById("backToTop").style.display = window.scrollY > 300 ? "block" : "none";
     });
 
-    document.getElementById("howItWorksBtn").addEventListener("click", function () {
-        window.scrollTo({ top: document.querySelector(".features").offsetTop, behavior: "smooth" });
-    });
-
-    document.getElementById("basicScanBtn").addEventListener("click", function () {
-        alert("Redirecting to Basic Scan sign-up...");
-        window.location.href = "https://aegisvault.com/basic-scan";
-    });
-
-    document.getElementById("advancedAuditBtn").addEventListener("click", function () {
-        alert("Redirecting to Advanced Audit checkout...");
-        window.location.href = "https://aegisvault.com/advanced-audit";
-    });
-
-    document.getElementById("contactUsBtn").addEventListener("click", function () {
-        alert("Opening Contact Form...");
-        window.location.href = "mailto:support@aegisvault.com";
+    // Newsletter Form
+    document.getElementById("newsletter-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        alert("Subscribed successfully!");
     });
 });
