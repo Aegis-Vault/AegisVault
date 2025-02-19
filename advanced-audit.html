@@ -3,27 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Audit Request</title>
+    <title>Advanced Security Audit</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Request an Advanced Security Audit</h2>
-        <form action="https://formspree.io/f/mdkaydrl" method="POST">
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" required>
 
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required>
+<h2>Request an Advanced Security Audit</h2>
+<form action="https://formspree.io/f/mdkaydrl" method="POST">
+    <label>Full Name: <input type="text" name="name" required></label>
+    <label>Email Address: <input type="email" name="email" required></label>
+    <label>Smart Contract Address: <input type="text" name="contract" required></label>
+    <label>Additional Details: <textarea name="details"></textarea></label>
+    <button type="submit">Submit Request</button>
+</form>
 
-            <label for="contract">Smart Contract Address:</label>
-            <input type="text" id="contract" name="contract" required>
-
-            <label for="details">Additional Details:</label>
-            <textarea id="details" name="details"></textarea>
-
-            <button type="submit">Submit Request</button>
-        </form>
-    </div>
 </body>
 </html>
