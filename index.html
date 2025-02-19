@@ -3,57 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AegisVault - Web3 Security</title>
+    <title>AegisVault | Web3 Security</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
 
     <header class="hero">
         <h1>AegisVault: Web3 Security, Redefined.</h1>
         <p>Eliminate vulnerabilities. Protect your smart contracts. Secure Web3.</p>
-        <div class="buttons">
-            <a href="#security-audit" class="btn primary">🔒 Get a Security Audit</a>
-            <a href="#how-it-works" class="btn secondary">📖 How AegisVault Works</a>
-        </div>
+        <button class="cta-btn primary" id="auditBtn">🔒 Get a Security Audit</button>
+        <button class="cta-btn secondary" id="howItWorksBtn">📖 How AegisVault Works</button>
     </header>
 
-    <section id="why-aegisvault" class="features">
-        <h2>🔹 Why AegisVault?</h2>
-        <div class="feature-container">
-            <div class="feature-card">✅ <strong>Decentralized Identity</strong> <p>No central points of failure. Fully decentralized security.</p></div>
-            <div class="feature-card">✅ <strong>AI-Driven Monitoring</strong> <p>Detect & prevent attacks before they happen.</p></div>
-            <div class="feature-card">✅ <strong>Smart Contract Auditing</strong> <p>Real-time security scanning for vulnerabilities.</p></div>
+    <section class="features">
+        <h2>🔷 Why AegisVault?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">✅ <strong>Decentralized Identity</strong><p>No central points of failure. Fully decentralized security.</p></div>
+            <div class="feature-card">✅ <strong>AI-Driven Monitoring</strong><p>Detect & prevent attacks before they happen.</p></div>
+            <div class="feature-card">✅ <strong>Smart Contract Auditing</strong><p>Real-time security scanning for vulnerabilities.</p></div>
         </div>
     </section>
 
-    <section id="security-packages">
+    <section class="packages">
         <h2>💰 Security Packages</h2>
-        <div class="package-container">
-            <div class="package">
-                <h3>🔹 Basic Scan</h3>
-                <p>✅ AI-powered contract check <br> ✅ Quick report</p>
-                <span class="price">FREE</span>
-                <a href="#" class="btn">Get Started</a>
+        <div class="package-grid">
+            <div class="package-card">
+                <h3>🔷 Basic Scan</h3>
+                <p>✅ AI-powered contract check</p>
+                <p>✅ Quick report</p>
+                <p><strong>FREE</strong></p>
+                <button class="cta-btn" id="basicScanBtn">Get Started</button>
             </div>
-            <div class="package highlight">
+            <div class="package-card highlight">
                 <h3>🔥 Advanced Audit</h3>
-                <p>✅ AI + Manual review <br> ✅ Detailed vulnerability report</p>
-                <span class="price">$499</span>
-                <a href="#" class="btn primary">Secure Your Assets</a>
+                <p>✅ AI + Manual review</p>
+                <p>✅ Detailed vulnerability report</p>
+                <p><strong>$499</strong></p>
+                <button class="cta-btn" id="advancedAuditBtn">Secure Your Assets</button>
             </div>
-            <div class="package">
+            <div class="package-card">
                 <h3>🏆 Enterprise Protection</h3>
-                <p>✅ Full-time monitoring <br> ✅ Smart contract security suite</p>
-                <span class="price">Custom Pricing</span>
-                <a href="#" class="btn secondary">Contact Us</a>
+                <p>✅ Full-time monitoring</p>
+                <p>✅ Smart contract security suite</p>
+                <p><strong>Custom Pricing</strong></p>
+                <button class="cta-btn" id="contactUsBtn">Contact Us</button>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
+    <footer>
         <h2>🌍 Join the AegisVault Community</h2>
         <p>Stay updated on Web3 security, join discussions, and connect with other builders.</p>
-        <div class="social-links">
+        <div class="footer-links">
             <a href="https://github.com/aegis-vault" target="_blank">GitHub</a> |
             <a href="https://twitter.com/aegisvault" target="_blank">Twitter</a> |
             <a href="https://t.me/aegisvault" target="_blank">Telegram</a>
