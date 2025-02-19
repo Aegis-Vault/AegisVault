@@ -3,80 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AegisVault - Decentralized Web3 Security Solutions">
-    <title>AegisVault - Web3 Security</title>
+    <title>AegisVault: Web3 Security</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 
-    <!-- Sticky Header -->
-    <header class="sticky-header">
-        <h1>AegisVault</h1>
-        <nav>
-            <a href="#why">Why AegisVault?</a>
-            <a href="#packages">Security Packages</a>
-            <a href="#contact">Join Community</a>
-        </nav>
-    </header>
+<header>
+    <h1>AegisVault</h1>
+    <nav>
+        <ul>
+            <li><a href="#why">Why AegisVault?</a></li>
+            <li><a href="#packages">Security Packages</a></li>
+            <li><a href="#contact">Join Community</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h2>AegisVault: Web3 Security, Redefined.</h2>
-        <p>Eliminate vulnerabilities. Protect your smart contracts. Secure Web3.</p>
-        <div class="buttons">
-            <button onclick="redirectToAudit()">🔒 Get a Security Audit</button>
-            <button onclick="scrollToSection('how-it-works')">📖 How AegisVault Works</button>
-        </div>
-    </section>
+<section id="why">
+    <h2>Why AegisVault?</h2>
+    <p>Eliminate vulnerabilities. Protect your smart contracts. Secure Web3.</p>
+</section>
 
-    <!-- Why AegisVault -->
-    <section id="why">
-        <h2>🔹 Why AegisVault?</h2>
-        <div class="feature-container">
-            <div class="feature-box">✅ <strong>Decentralized Identity</strong> - No central points of failure.</div>
-            <div class="feature-box">✅ <strong>AI-Driven Monitoring</strong> - Detect and prevent attacks before they happen.</div>
-            <div class="feature-box">✅ <strong>Smart Contract Auditing</strong> - Real-time security scanning.</div>
-        </div>
-    </section>
+<section id="packages">
+    <h2>💰 Security Packages</h2>
 
-    <!-- Security Packages -->
-    <section id="packages">
-        <h2>💰 Security Packages</h2>
-        <div class="packages-container">
-            <div class="package">
-                <h3>🔹 Basic Scan</h3>
-                <p>✅ AI-powered contract check <br> ✅ Quick report</p>
-                <p class="price">FREE</p>
-                <button onclick="window.location.href='basic-scan.html'">Get Started</button>
-            </div>
-            <div class="package premium">
-                <h3>🔥 Advanced Audit</h3>
-                <p>✅ AI + Manual review <br> ✅ Detailed vulnerability report</p>
-                <p class="price">$499</p>
-                <button onclick="window.location.href='advanced-audit.html'">Secure Your Assets</button>
-            </div>
-            <div class="package">
-                <h3>🏆 Enterprise Protection</h3>
-                <p>✅ Full-time monitoring <br> ✅ Smart contract security suite</p>
-                <p class="price">Custom Pricing</p>
-                <button onclick="window.location.href='contact.html'">Contact Us</button>
-            </div>
-        </div>
-    </section>
+    <div class="package">
+        <h3>🔹 Basic Scan</h3>
+        <p>✅ AI-powered contract check <br> ✅ Quick report</p>
+        <p class="price">FREE</p>
+        <button onclick="redirectToBasicScan()">Get Started</button>
+    </div>
 
-    <!-- Newsletter & Community -->
-    <section id="contact">
-        <h2>🌍 Join the AegisVault Community</h2>
-        <p>Stay updated on Web3 security, join discussions, and connect with other builders.</p>
-        <form id="newsletter-form">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="submit">Subscribe</button>
-        </form>
-    </section>
+    <div class="package premium">
+        <h3>🔥 Advanced Audit</h3>
+        <p>✅ AI + Manual review <br> ✅ Detailed vulnerability report</p>
+        <p class="price">$499</p>
+        <button onclick="redirectToAdvancedAudit()">Secure Your Assets</button>
+    </div>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" onclick="scrollToTop()">⬆ Back to Top</button>
+    <div class="package">
+        <h3>🏆 Enterprise Protection</h3>
+        <p>✅ Full-time monitoring <br> ✅ Smart contract security suite</p>
+        <p class="price">Custom Pricing</p>
+        <button onclick="redirectToContact()">Contact Us</button>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>🌍 Join the AegisVault Community</h2>
+    <form id="newsletter-form">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+</section>
 
 </body>
 </html>
