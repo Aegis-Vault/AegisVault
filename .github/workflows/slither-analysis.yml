@@ -1,43 +1,56 @@
-name: Run Slither Security Analysis
+name: Run Smart Contract Security Analysis
 
 on:
   workflow_dispatch: # Allows manual trigger
   push:
     paths:
-      - "contracts/**.sol" # Runs when a Solidity file is added
+      - "contracts/**.sol" # Runs when a Solidity file is added/modified
   pull_request:
     paths:
       - "contracts/**.sol"
 
 jobs:
-  slither:
+  security-analysis:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      # Install Solidity Compiler (solc)
       - name: Install Solidity Compiler
         run: |
           sudo apt update && sudo apt install -y solc
 
-      - name: Install solc-select and Set Solidity Version
-        run: |
-          curl -L https://github.com/crytic/solc-select/releases/latest/download/solc-select -o solc-select
-          chmod +x solc-select
-          sudo mv solc-select /usr/local/bin/
-          solc-select install 0.8.21  # Change this version if needed
-          solc-select use 0.8.21      # Ensure this version is used
-
+      # Install Slither for fast security analysis
       - name: Install Slither
         run: |
           pip install slither-analyzer
 
+      # Run Slither and generate report
       - name: Run Slither Security Analysis
         run: |
-          slither contracts/ --json report.json || true
+          slither contracts/ --json slither-report.json || true
 
+      # Install Mythril for deep symbolic execution testing
+      - name: Install Mythril
+        run: |
+          pip install mythril
+
+      # Run Mythril and generate report
+      - name: Run Mythril Security Analysis
+        run: |
+          myth analyze contracts/ --execution-timeout 300 --out format=json > mythril-report.json || true
+
+      # Upload Slither Report
       - name: Upload Slither Report
         uses: actions/upload-artifact@v4
         with:
           name: slither-report
-          path: report.json
+          path: slither-report.json
+
+      # Upload Mythril Report
+      - name: Upload Mythril Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mythril-report
+          path: mythril-report.json
