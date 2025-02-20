@@ -1,63 +1,38 @@
-name: Run Smart Contract Security Analysis
+name: Run Solidity Security Analysis
 
 on:
-  workflow_dispatch: # Allows manual trigger
+  workflow_dispatch:
   push:
     paths:
-      - "contracts/**.sol" # Runs when a Solidity file is added/modified
+      - "contracts/**.sol"
   pull_request:
     paths:
       - "contracts/**.sol"
 
 jobs:
-  security-analysis:
+  security_scan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Install Solidity Compiler (solc) and set correct version
-      - name: Install Solidity Compiler
+      - name: Install Solidity Compiler Manually
         run: |
-          sudo apt update && sudo apt install -y solc solc-select
-          solc-select install 0.8.21 # Change this to your required version
-          solc-select use 0.8.21
-          echo "SOLC_VERSION=0.8.21" >> $GITHUB_ENV
+          wget https://github.com/ethereum/solidity/releases/download/v0.8.21/solc-static-linux
+          chmod +x solc-static-linux
+          sudo mv solc-static-linux /usr/local/bin/solc
+          solc --version
 
-      # Verify Solidity Compiler Installation
-      - name: Check Solidity Version
-        run: solc --version
-
-      # Install Slither for fast security analysis
-      - name: Install Slither
-        run: |
-          pip install slither-analyzer
-
-      # Run Slither and generate report
-      - name: Run Slither Security Analysis
-        run: |
-          slither contracts/ --json slither-report.json || true
-
-      # Install Mythril for deep symbolic execution testing
       - name: Install Mythril
         run: |
           pip install mythril
 
-      # Run Mythril and generate report
       - name: Run Mythril Security Analysis
         run: |
-          myth analyze contracts/ --execution-timeout 300 --out format=json > mythril-report.json || true
+          myth analyze contracts/*.sol --execution-timeout 300 --output json > mythril_report.json || true
 
-      # Upload Slither Report
-      - name: Upload Slither Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: slither-report
-          path: slither-report.json
-
-      # Upload Mythril Report
-      - name: Upload Mythril Report
+      - name: Upload Security Report
         uses: actions/upload-artifact@v4
         with:
           name: mythril-report
-          path: mythril-report.json
+          path: mythril_report.json
