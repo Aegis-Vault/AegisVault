@@ -16,10 +16,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Install Solidity Compiler (solc)
+      # Install Solidity Compiler (solc) and set correct version
       - name: Install Solidity Compiler
         run: |
-          sudo apt update && sudo apt install -y solc
+          sudo apt update && sudo apt install -y solc solc-select
+          solc-select install 0.8.21 # Change this to your required version
+          solc-select use 0.8.21
+          echo "SOLC_VERSION=0.8.21" >> $GITHUB_ENV
+
+      # Verify Solidity Compiler Installation
+      - name: Check Solidity Version
+        run: solc --version
 
       # Install Slither for fast security analysis
       - name: Install Slither
