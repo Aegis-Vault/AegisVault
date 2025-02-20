@@ -1,0 +1,38 @@
+name: Run Solidity Security Analysis
+
+on:
+  workflow_dispatch: # Allows manual trigger
+  push:
+    paths:
+      - "contracts/**.sol" # Runs when a Solidity file is added
+  pull_request:
+    paths:
+      - "contracts/**.sol"
+
+jobs:
+  security_analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Solidity Compiler
+        run: |
+          sudo apt update
+          sudo apt install -y solc
+          solc --version
+
+      - name: Install Mythril (Alternative to Slither)
+        run: |
+          pip install mythril
+
+      - name: Run Mythril Security Analysis
+        run: |
+          myth analyze contracts/*.sol --execution-timeout 300 --max-depth 30 --solver-timeout 1000 > mythril-report.txt || true
+
+      - name: Upload Mythril Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mythril-report
+          path: mythril-report.txt
