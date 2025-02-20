@@ -2,18 +2,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #111;
-    color: #fff;
-    text-align: center;
+    background-color: #121212;
+    color: white;
 }
 
 header {
-    background-color: #222;
-    padding: 15px;
-}
-
-h1 {
-    color: #4CAF50;
+    background: #1e1e1e;
+    padding: 10px;
+    text-align: center;
 }
 
 nav ul {
@@ -23,44 +19,36 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin: 0 10px;
+    margin-right: 10px;
 }
 
 nav ul li a {
-    color: #4CAF50;
+    color: #00bcd4;
     text-decoration: none;
 }
 
-.package {
-    border: 1px solid #4CAF50;
+section {
     padding: 20px;
-    margin: 20px auto;
-    width: 80%;
-    max-width: 400px;
-    background-color: #222;
-    border-radius: 10px;
 }
 
-.premium {
-    border: 2px solid #FFD700;
+.package {
+    background: #222;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 .button {
     display: inline-block;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
+    background: #00bcd4;
+    color: black;
+    padding: 10px;
     border-radius: 5px;
-    margin-top: 10px;
-}
-
-.button:hover {
-    background-color: #45a049;
+    text-decoration: none;
 }
 
 footer {
-    margin-top: 20px;
+    text-align: center;
     padding: 10px;
-    background-color: #222;
+    background: #1e1e1e;
 }
