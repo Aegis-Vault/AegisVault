@@ -16,15 +16,19 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Install Solidity Compiler
+        run: |
+          sudo apt update && sudo apt install -y solc
+
       - name: Install Slither
         run: |
           pip install slither-analyzer
-          
-   - name: Run Slither Security Analysis
-  run: slither contracts/testContract.sol --json report.json || true
-      
-    - name: Upload Slither Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: slither-report
-        path: report.json
+
+      - name: Run Slither Security Analysis
+        run: slither contracts/testContract.sol --json report.json
+
+      - name: Upload Slither Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: slither-report
+          path: report.json
