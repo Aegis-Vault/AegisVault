@@ -1,0 +1,58 @@
+name: Solidity Security Analysis
+
+on:
+  workflow_dispatch:
+
+jobs:
+  security_scan:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Solidity Compiler
+        run: |
+          sudo add-apt-repository ppa:ethereum/ethereum
+          sudo apt-get update
+          sudo apt-get install -y solc
+
+      # ✅ Run Slither (Static Analysis)
+      - name: Run Slither Security Analysis
+        run: |
+          pip install slither-analyzer
+          slither contracts/ --json slither-report.json || true
+
+      # ✅ Run Mythril (Symbolic Execution)
+      - name: Install Mythril
+        run: pip install mythril
+      - name: Run Mythril Security Analysis
+        run: myth analyze contracts/*.sol --execution-timeout 300 --max-depth 30 --solver-timeout 1000 > mythril-report.txt || true
+
+      # ✅ Run Oyente (Another Symbolic Execution Tool)
+      - name: Install Oyente
+        run: |
+          git clone https://github.com/melonproject/oyente.git
+          cd oyente
+          pip install -r requirements.txt
+      - name: Run Oyente Security Analysis
+        run: python3 oyente/oyente.py -s contracts/*.sol > oyente-report.txt || true
+
+      # ✅ Run SmartCheck (Pattern-Based Analysis)
+      - name: Install SmartCheck
+        run: |
+          docker pull smartdec/smartcheck
+      - name: Run SmartCheck Security Analysis
+        run: |
+          docker run --rm -v $PWD/contracts:/contracts smartdec/smartcheck /contracts > smartcheck-report.txt || true
+
+      # ✅ Upload All Reports
+      - name: Upload Security Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            slither-report.json
+            mythril-report.txt
+            oyente-report.txt
+            smartcheck-report.txt
