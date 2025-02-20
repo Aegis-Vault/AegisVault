@@ -18,14 +18,15 @@ jobs:
 
       - name: Install Solidity Compiler
         run: |
-          sudo apt update
-          sudo apt install -y solc
+          sudo apt update && sudo apt install -y solc
 
-      - name: Install Solc Select
+      - name: Install solc-select and Set Solidity Version
         run: |
-          pip install solc-select
-          solc-select install 0.8.21  # Replace with the required version
-          solc-select use 0.8.21
+          curl -L https://github.com/crytic/solc-select/releases/latest/download/solc-select -o solc-select
+          chmod +x solc-select
+          sudo mv solc-select /usr/local/bin/
+          solc-select install 0.8.21  # Change this version if needed
+          solc-select use 0.8.21      # Ensure this version is used
 
       - name: Install Slither
         run: |
