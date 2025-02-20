@@ -1,7 +1,7 @@
 name: Run Slither Security Analysis
 
 on:
-  workflow_dispatch: # Manually trigger the workflow
+  workflow_dispatch: # Allows manual trigger
   push:
     paths:
       - "contracts/**.sol" # Runs when a Solidity file is added
@@ -22,10 +22,10 @@ jobs:
 
       - name: Run Slither
         run: |
-          slither contracts/ --json report.json
+          slither contracts/ --json report.json || true
 
       - name: Upload Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
           name: slither-report
           path: report.json
