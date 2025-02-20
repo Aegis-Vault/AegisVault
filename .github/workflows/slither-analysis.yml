@@ -1,0 +1,31 @@
+name: Run Slither Security Analysis
+
+on:
+  workflow_dispatch: # Manually trigger the workflow
+  push:
+    paths:
+      - "contracts/**.sol" # Runs when a Solidity file is added
+  pull_request:
+    paths:
+      - "contracts/**.sol"
+
+jobs:
+  slither:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Slither
+        run: |
+          pip install slither-analyzer
+
+      - name: Run Slither
+        run: |
+          slither contracts/ --json report.json
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: slither-report
+          path: report.json
