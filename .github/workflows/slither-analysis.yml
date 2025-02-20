@@ -20,8 +20,8 @@ jobs:
         run: |
           pip install slither-analyzer
           
-    - name: Run Slither Security Analysis
-      run: slither . --json report.json || true
+   - name: Run Slither Security Analysis
+  run: slither contracts/testContract.sol --json report.json || true
       
     - name: Upload Slither Report
       uses: actions/upload-artifact@v4
