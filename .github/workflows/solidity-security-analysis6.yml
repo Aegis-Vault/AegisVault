@@ -1,0 +1,102 @@
+name: Solidity Security Analysis
+
+on:
+  workflow_dispatch:
+
+jobs:
+  security_analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up job
+        run: echo "Starting Solidity Security Analysis"
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Install Solidity Compiler
+      - name: Install Solidity Compiler
+        run: |
+          sudo add-apt-repository ppa:ethereum/ethereum -y
+          sudo apt-get update
+          sudo apt-get install -y solc
+          solc --version
+
+      # Install Mythril
+      - name: Install Mythril
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install mythril
+
+      # Run Mythril Analysis
+      - name: Run Mythril Analysis
+        run: myth analyze contracts/*.sol --execution-timeout 300 --max-depth 30 --solver-timeout 1000 > mythril-report.txt || true
+
+      # Upload Mythril Report
+      - name: Upload Mythril Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mythril-report
+          path: mythril-report.txt
+
+      # Install Slither
+      - name: Install Slither
+        run: |
+          python3 -m pip install slither-analyzer
+          slither --version
+
+      # Run Slither Analysis
+      - name: Run Slither Analysis
+        run: slither contracts/ --json slither-report.json || true
+
+      # Upload Slither Report
+      - name: Upload Slither Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: slither-report
+          path: slither-report.json
+
+      # Install Oyente
+     - name: Install Oyente
+        run: |
+          sudo apt-get install -y python3-setuptools python3-venv
+          git clone https://github.com/enzymefinance/oyente.git
+          cd oyente
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install requests==2.27.1 eth-hash==0.3.2
+          python3 setup.py install
+
+
+      # Run Oyente Analysis
+      - name: Run Oyente Analysis
+        run: cd oyente && python3 oyente.py -s ../contracts/*.sol > oyente-report.txt || true
+
+      # Upload Oyente Report
+      - name: Upload Oyente Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: oyente-report
+          path: oyente/oyente-report.txt
+
+      # Install SmartCheck
+      - name: Install SmartCheck
+        run: |
+          git clone https://github.com/smartdec/smartcheck.git
+          cd smartcheck
+          docker build -t smartcheck .
+
+      # Run SmartCheck Analysis
+      - name: Run SmartCheck Analysis
+        run: docker run --rm -v $PWD/contracts:/contracts smartcheck -p /contracts > smartcheck-report.txt || true
+
+      # Upload SmartCheck Report
+      - name: Upload SmartCheck Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: smartcheck-report
+          path: smartcheck-report.txt
+
+      - name: Complete Job
+        run: echo "Security analysis completed."
