@@ -26,11 +26,11 @@
 
     <script>
         document.getElementById("securityScanForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
+            event.preventDefault();  // Prevents form from refreshing
 
+            const formData = new FormData(event.target);
             const payload = {
-                ref: "main", // Branch name
+                ref: "main", // GitHub branch name
                 inputs: {
                     name: formData.get("name"),
                     email: formData.get("email"),
@@ -38,26 +38,29 @@
                 }
             };
 
-            console.log("Submitting:", payload);
+            console.log("Submitting:", payload); // Debugging log
 
-            // API request to GitHub Actions
-            fetch("https://api.github.com/repos/AegisVault/AegisVault/actions/workflows/security-analysis7.yml/dispatches", { 
-                method: "POST",
-                headers: { 
-                    "Accept": "application/vnd.github.v3+json",
-                    "Authorization": "Bearer YOUR_GITHUB_PERSONAL_ACCESS_TOKEN", 
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(response => {
+            try {
+                const response = await fetch("https://api.github.com/repos/AegisVault/AegisVault/actions/workflows/security-analysis7.yml/dispatches", { 
+                    method: "POST",
+                    headers: { 
+                        "Accept": "application/vnd.github.v3+json",
+                        "Authorization": "Bearer UPLOAD_TOKEN", 
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
                 if (response.ok) {
                     alert("Submission successful! Check GitHub Actions.");
                 } else {
-                    alert("Submission failed. Check GitHub Actions.");
+                    alert("Submission failed. Check console.");
+                    console.error("Error Response:", await response.text());
                 }
-            })
-            .catch(error => console.error("Error:", error));
+            } catch (error) {
+                console.error("Request failed:", error);
+                alert("Submission failed. Check console.");
+            }
         });
     </script>    
 </body>
