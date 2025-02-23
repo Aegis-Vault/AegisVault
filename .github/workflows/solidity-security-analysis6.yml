@@ -57,7 +57,7 @@ jobs:
           path: slither-report.json
 
       # Install Oyente
-     - name: Install Oyente
+      - name: Install Oyente
         run: |
           sudo apt-get install -y python3-setuptools python3-venv
           git clone https://github.com/enzymefinance/oyente.git
