@@ -24,9 +24,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Upload Security Report to GitHub
         env:
-           GITHUB_TOKEN: ${{ secrets.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 }}
+           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-            curl -X POST -H "Authorization: Bearer ${{ secrets.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 }}" \
+            curl -X POST -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/Aegis-Vault/AegisVault/issues \
             -d '{"title": "Security Report", "body": "New security report uploaded."}'
