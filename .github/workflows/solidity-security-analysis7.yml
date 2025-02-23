@@ -86,17 +86,26 @@ jobs:
           name: slither-report
           path: slither-report.json
 
-      # Install Oyente (Fixing the Requirements Issue)
-      - name: Install Oyente
+      # Install Oyente (Fixing the Requirements 
+      - name: Install Oyente manually
         run: |
-          sudo apt-get install -y python3-setuptools
-          git clone https://github.com/enzymefinance/oyente.git
+          git clone https://github.com/melonproject/oyente.git
           cd oyente
-          pip3 install --upgrade pip
-          pip3 install requests==2.27.1 eth-hash==0.3.2
-          pip3 install -r requirements.txt || true  # Skip error if file is missing
-          python3 setup.py install || true
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip setuptools wheel
+          pip install requests pyyaml solc z3-solver web3
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.7'  # Change if needed
+
+      - name: Run Oyente Security Analysis
+        run: |
+         cd oyente
+         python oyente.py --help
+    
       - name: Run Oyente Analysis
         run: cd oyente && python3 oyente.py -s ../contracts/*.sol > oyente-report.txt || true
 
