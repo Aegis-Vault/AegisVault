@@ -22,16 +22,15 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@v3
-
       - name: Upload Security Report to GitHub
         env:
-          GITHUB_TOKEN: ${{ secrets.UPLOAD_TOKEN }}
+           GITHUB_TOKEN: ${{ secrets.UPLOAD_TOKEN }}
         run: |
-          curl -X POST -H "Authorization: token $UPLOAD_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               https://api.github.com/repos/Aegis-Vault/AegisVault/issues \
-               -d '{"title": "Security Report", "body": "New security report uploaded."}'
-
+            curl -X POST -H "Authorization: Bearer ${{ secrets.UPLOAD_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/Aegis-Vault/AegisVault/issues \
+            -d '{"title": "Security Report", "body": "New security report uploaded."}'
+     
       - name: Checkout repository
         uses: actions/checkout@v3
 
