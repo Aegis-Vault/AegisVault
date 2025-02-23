@@ -86,35 +86,6 @@ jobs:
           name: slither-report
           path: slither-report.json
 
-      # Install Oyente (Fixing the Requirements 
-      - name: Install Oyente manually
-        run: |
-          git clone https://github.com/melonproject/oyente.git
-          cd oyente
-          python -m venv venv
-          source venv/bin/activate
-          pip install --upgrade pip setuptools wheel
-          pip install requests pyyaml solc z3-solver web3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.7'  # Change if needed
-
-      - name: Run Oyente Security Analysis
-        run: |
-         cd oyente
-         python oyente.py --help
-    
-      - name: Run Oyente Analysis
-        run: cd oyente && python3 oyente.py -s ../contracts/*.sol > oyente-report.txt || true
-
-      - name: Upload Oyente Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: oyente-report
-          path: oyente-report.txt
-
       # Install SmartCheck
       - name: Install SmartCheck
         run: |
