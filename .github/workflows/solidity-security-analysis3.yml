@@ -59,11 +59,12 @@ jobs:
       # Install Oyente
       - name: Install Oyente
         run: |
-          sudo apt-get install -y python3-setuptools
-          git clone https://github.com/enzymefinance/oyente.git
-          cd oyente
-          pip3 install -r requirements.txt
-          python3 setup.py install
+        sudo apt-get install -y python3-setuptools
+        git clone https://github.com/enzymefinance/oyente.git
+        cd oyente
+        pip3 install --upgrade pip
+        pip3 install -r requirements.txt || pip3 install requests==2.27.1 eth-hash==0.3.2
+        python3 setup.py install
 
       # Run Oyente Analysis
       - name: Run Oyente Analysis
