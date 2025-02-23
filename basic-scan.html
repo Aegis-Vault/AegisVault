@@ -29,18 +29,20 @@
             const formData = new FormData(event.target);
 
             // API request to your backend (NOT directly to GitHub API)
-            fetch("https://your-backend-url.com/submit", { 
+            fetch("https://api.github.com/repos/AegisVault/AegisVault/actions/workflows/security-analysis7.yml/dispatches", { 
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    name: formData.get("name"),
-                    email: formData.get("email"),
-                    contract: formData.get("contract")
+                    headers: {
+                "Accept": "application/vnd.github.v3+json",
+                "Authorization": "Bearer UPLOAD_TOKEN",
+                "Content-Type": "application/json"
                 })
+                body: JSON.stringify(payload)
             })
             .then(response => {
                 if (response.ok) alert("Submission successful!");
-                else alert("Submission failed. Check the backend.");
+                else alert("Submission failed. Check GitHub Actions.");
             })
             .catch(error => console.error("Error:", error));
         });
