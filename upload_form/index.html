@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Solidity File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Your Solidity File</h2>
+        <form id="uploadForm">
+            <input type="file" id="solFile" accept=".sol" required>
+            <button type="submit">Upload</button>
+        </form>
+        <p id="status"></p>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const fileInput = document.getElementById('solFile');
+            const statusText = document.getElementById('status');
+            
+            if (fileInput.files.length === 0) {
+                statusText.textContent = "Please select a Solidity file.";
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+            
+            statusText.textContent = "Uploading...";
+            
+            try {
+                const response = await fetch('https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPO/contents/uploads/' + file.name, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'token UPLOAD_TOKEN',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Upload Solidity file',
+                        content: await file.arrayBuffer().then(buf => btoa(String.fromCharCode(...new Uint8Array(buf))))
+                    })
+                });
+                
+                if (response.ok) {
+                    statusText.textContent = "Upload successful! Security scan will start soon.";
+                } else {
+                    statusText.textContent = "Upload failed. Please check your repository permissions.";
+                }
+            } catch (error) {
+                statusText.textContent = "Error: " + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
