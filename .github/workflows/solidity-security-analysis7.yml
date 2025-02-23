@@ -2,7 +2,17 @@ name: Solidity Security Analysis
 
 on:
   workflow_dispatch:
-
+    
+    inputs:
+      name:
+        description: "Full Name"
+        required: true
+      email:
+        description: "Email Address"
+        required: true
+      contract:
+        description: "Smart Contract Address"
+        required: true
 jobs:
   security_analysis:
     runs-on: ubuntu-latest
@@ -21,6 +31,24 @@ jobs:
                -H "Accept: application/vnd.github.v3+json" \
                https://api.github.com/repos/Aegis-Vault/AegisVault/issues \
                -d '{"title": "Security Report", "body": "New security report uploaded."}'
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Save submission data
+        run: |
+          echo "Name: ${{ github.event.inputs.name }}" >> submissions.txt
+          echo "Email: ${{ github.event.inputs.email }}" >> submissions.txt
+          echo "Contract: ${{ github.event.inputs.contract }}" >> submissions.txt
+          echo "---------------------------------" >> submissions.txt
+
+      - name: Commit and push
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add submissions.txt
+          git commit -m "New security scan request"
+          git push       
     
       # Install Solidity Compiler
       - name: Install Solidity Compiler
