@@ -23,29 +23,42 @@
 
         <button type="submit">Submit Request</button>
     </form>
+
     <script>
         document.getElementById("securityScanForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
 
-            // API request to your backend (NOT directly to GitHub API)
+            const payload = {
+                ref: "main", // Branch name
+                inputs: {
+                    name: formData.get("name"),
+                    email: formData.get("email"),
+                    contract: formData.get("contract")
+                }
+            };
+
+            console.log("Submitting:", payload);
+
+            // API request to GitHub Actions
             fetch("https://api.github.com/repos/AegisVault/AegisVault/actions/workflows/security-analysis7.yml/dispatches", { 
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    headers: {
-                "Accept": "application/vnd.github.v3+json",
-                "Authorization": "Bearer UPLOAD_TOKEN",
-                "Content-Type": "application/json"
-                })
+                headers: { 
+                    "Accept": "application/vnd.github.v3+json",
+                    "Authorization": "Bearer YOUR_GITHUB_PERSONAL_ACCESS_TOKEN", 
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify(payload)
             })
             .then(response => {
-                if (response.ok) alert("Submission successful!");
-                else alert("Submission failed. Check GitHub Actions.");
+                if (response.ok) {
+                    alert("Submission successful! Check GitHub Actions.");
+                } else {
+                    alert("Submission failed. Check GitHub Actions.");
+                }
             })
             .catch(error => console.error("Error:", error));
         });
-</script>    
+    </script>    
 </body>
 </html>
