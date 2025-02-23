@@ -25,5 +25,27 @@
         <button type="submit">Submit Request</button>
     </form>
 
+<script>
+    document.getElementById("securityScanForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const json = JSON.stringify(Object.fromEntries(formData));
+
+        fetch("https://api.github.com/repos/AegisVault/AegisVault/actions/workflows/security-analysis7.yml/dispatches", {
+            method: "POST",
+            headers: {
+                "Accept": "application/vnd.github.v3+json",
+                "Authorization": "Bearer UPLOAD_TOKEN"
+            },
+            body: JSON.stringify({
+                ref: "main",
+                inputs: json
+            })
+        }).then(response => {
+            if (response.ok) alert("Submission successful!");
+            else alert("Submission failed. Check GitHub Actions.");
+        }).catch(error => console.error("Error:", error));
+    });
+</script>
 </body>
 </html>
