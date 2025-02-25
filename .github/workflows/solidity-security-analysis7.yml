@@ -1,8 +1,11 @@
 name: Solidity Security Analysis
 
 on:
-  workflow_dispatch:
-    
+  workflow_dispatch:  # ✅ This allows API triggers
+  push:
+    branches:
+      - main
+      
     inputs:
       name:
         description: "Full Name"
