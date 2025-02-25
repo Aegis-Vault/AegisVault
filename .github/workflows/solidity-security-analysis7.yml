@@ -15,7 +15,7 @@ on:
         required: true
 jobs:
   security_analysis:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # Instead of 'ubuntu-latest'
     steps:
       - name: Set up job
         run: echo "Starting Solidity Security Analysis"
@@ -24,12 +24,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Upload Security Report to GitHub
         env:
-           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }}  # Use locally stored token
         run: |
-            curl -X POST -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/Aegis-Vault/AegisVault/issues \
-            -d '{"title": "Security Report", "body": "New security report uploaded."}'
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/Aegis-Vault/AegisVault/issues \
+          -d '{"title": "Security Report", "body": "New security report uploaded."}'
      
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -42,12 +42,14 @@ jobs:
           echo "---------------------------------" >> submissions.txt
 
       - name: Commit and push
+        env:
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }}
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add submissions.txt
           git commit -m "New security scan request"
-          git push       
+          git push https://$GITHUB_TOKEN@github.com/Aegis-Vault/AegisVault.git      
     
       # Install Solidity Compiler
       - name: Install Solidity Compiler
