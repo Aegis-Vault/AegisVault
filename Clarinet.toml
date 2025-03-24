@@ -1,0 +1,32 @@
+[project]
+name = 'attackathon-stacks'
+description = ''
+authors = []
+telemetry = true
+cache_dir = './.cache'
+requirements = []
+
+[contracts]
+sbtc-deposit = "contracts/sbtc-deposit.clar"
+sbtc-withdrawal = "contracts/sbtc-withdrawal.clar"
+sbtc-token = "contracts/sbtc-token.clar"
+sbtc-registry = "contracts/sbtc-registry.clar"
+sbtc-bootstrap-signers = "contracts/sbtc-bootstrap-signers.clar"
+
+[contracts.sbtc_test]
+path = 'contracts/sbtc_test.clar'
+clarity_version = 3
+epoch = 3.1
+
+[repl.analysis]
+passes = ['check_checker']
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
+
+[repl.remote_data]
+enabled = false
+api_url = 'https://api.hiro.so'

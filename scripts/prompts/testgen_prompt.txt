@@ -1,0 +1,6 @@
+Write a Clarinet integration test in TypeScript using the Clarinet SDK to test the following issue:
+
+Issue:
+{{issue_description}}
+
+Format it for Clarinet (not TestVM or Rust). Target a contract named "{{contract_name}}" and generate the test in valid .ts format.

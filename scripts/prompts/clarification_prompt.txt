@@ -1,0 +1,12 @@
+You are auditing a smart contract vulnerability report during a bug bounty.
+
+Determine if the issue described below is:
+
+1. Feasible — under realistic assumptions (local testnet or potential mainnet logic).
+2. Exploitable — can it result in loss or freeze of funds?
+3. Valid — not a false positive or previously known issue.
+
+Be concise but decisive. Mark as “Confirmed” if it qualifies.
+
+Issue:
+{{issue_description}}

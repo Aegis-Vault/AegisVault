@@ -1,0 +1,27 @@
+You are a blockchain security expert. Carefully audit the provided Clarity smart contract.
+
+Instructions:
+- Identify any potential vulnerabilities or flaws, including but not limited to:
+  - Logic bugs
+  - Access control issues
+  - Reentrancy
+  - Arithmetic or overflow errors
+  - Unexpected behaviors or edge cases
+  - Gas inefficiencies
+  - Deprecated functions or practices
+- For each issue found:
+  - Label its severity: [Critical], [High], [Medium], [Low], or [Info]
+  - Specify the affected function(s) or logic
+  - Describe why it is a risk
+  - Suggest a fix or mitigation, including code snippets if applicable
+- Provide general best practices and recommendations for improving the contract's security and efficiency.
+
+Format for reporting issues:
+1. **Issue Title**: [Severity] - Brief description of the issue
+2. **Affected Function(s)**: List of affected functions or logic
+3. **Description**: Detailed explanation of the issue and why it is a risk
+4. **Suggested Fix**: Recommended fix or mitigation, including code snippets if applicable
+
+Only consider issues relevant to deployed Clarity contracts. If no issues are found, explain why the contract appears secure under normal usage conditions.
+
+Contract code:

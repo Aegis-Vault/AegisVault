@@ -1,0 +1,38 @@
+[
+    {
+        "contract": null,
+        "severity": "Critical",
+        "issue": "- 1. **Issue Title**: [Critical] - Unchecked arithmetic operations",
+        "source_line": 4,
+        "clarification": "1. Feasible: Yes, unchecked arithmetic operations can lead to overflows or underflows, which can cause unexpected behavior in smart contracts.\n2. Exploitable: Yes, if exploited, this could lead to loss or freeze of funds.\n3. Valid: Yes, unless it has been previously reported or is a known issue, unchecked arithmetic operations are a valid vulnerability. \n\nStatus: Confirmed.",
+        "confirmed": true,
+        "confidence": "Medium"
+    },
+    {
+        "contract": null,
+        "severity": "High",
+        "issue": "- 1. **Issue Title**: [High] - Lack of access control",
+        "source_line": 5,
+        "clarification": "1. Feasible - Yes, lack of access control can be a realistic issue in smart contracts where certain functions are not properly protected.\n2. Exploitable - Yes, if there is no proper access control, an attacker can call sensitive functions that can result in loss or freeze of funds.\n3. Valid - This report is valid if the issue has not been previously reported or known. \n\nStatus: Confirmed.",
+        "confirmed": false,
+        "confidence": "Medium"
+    },
+    {
+        "contract": null,
+        "severity": "Critical",
+        "issue": "- 1. **Issue Title**: [Critical] - Unchecked arithmetic operations",
+        "source_line": 8,
+        "clarification": "1. Feasible: Yes, unchecked arithmetic operations in smart contracts can lead to overflows or underflows, which can alter the logic of the contract.\n2. Exploitable: Yes, if exploited, it can lead to loss or freeze of funds. An attacker can manipulate the arithmetic operation to their advantage.\n3. Valid: Yes, unless it is a known issue or false positive, unchecked arithmetic operations are a valid and critical issue. \n\nStatus: Confirmed.",
+        "confirmed": true,
+        "confidence": "Medium"
+    },
+    {
+        "contract": null,
+        "severity": "High",
+        "issue": "- 2. **Issue Title**: [High] - Unrestricted write access",
+        "source_line": 9,
+        "clarification": "1. Feasible: Yes, unrestricted write access is a realistic issue that can occur in smart contracts if proper access control mechanisms are not implemented.\n2. Exploitable: Yes, this issue is exploitable. Unrestricted write access can allow unauthorized users to modify contract data, potentially leading to loss or freeze of funds.\n3. Valid: The report does not provide enough information to determine if this is a false positive or a previously known issue. If it is a new, previously unknown issue, then it is valid. \n\nMarked as \"Confirmed\" pending further information on its validity.",
+        "confirmed": false,
+        "confidence": "Medium"
+    }
+]
