@@ -1,0 +1,19 @@
+name: Clarinet Devnet Check
+
+on: [push, pull_request]
+
+jobs:
+  clarinet-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: npm install
+      - name: Run AI Helper Script
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: bash scripts/clarinet-ai-helper.sh
